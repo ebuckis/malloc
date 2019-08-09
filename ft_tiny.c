@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/09 11:24:07 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 13:19:14 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/09 16:32:07 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,24 +26,15 @@ void		*fill_tiny_table(t_tiny *lst, size_t i, size_t size)
 	return ((void *)(lst->ptr + i));
 }
 
-size_t			go_to_align_pos(size_t add)
-{
-	size_t	result;
-
-	result = add % ALIGN_POS;
-	result = (result == 0) ? add : add + ALIGN_POS - result;
-	return (result);
-}
-
-void		*search_place_in_tiny(size_t size, t_tiny lst)
+void		*search_place_in_tiny(size_t size, t_tiny *lst)
 {
 	size_t	i;
 	size_t	j;
 
-	if (lst = NULL)
+	if (lst == NULL)
 		return ((void *)0);
 	i = 0;//hypothese : adresse page % 4096 == 0
-	while (i < tiny_MAX)
+	while (i < TINY_MAX)
 	{
 		if (lst->adr_size[i] == 0)/* si la case est vide */
 		{
@@ -74,19 +65,30 @@ void		*new_tiny_area(size_t size)
 		while (new)
 		{
 			tmp = new;
-			new = new->next
+			new = new->next;
 		}
 	}
-	check = (tmp == new);
-	if ((new = mmap(MMAP_ARG(sizeof(new)))) == -1)
+	check = (tmp == g_stock.tiny);
+	if ((new = (t_tiny *)mmap(MMAP_ARG(sizeof(t_tiny)))) == (void *)-1)
 		return ((void *)-1);
+	printf("adress next : %ld\n", (long)new);
+	printf("c'est bon\n");
 	if (check)
 		g_stock.tiny = new;
 	else
 		tmp->next = new;
-	new->next = NULL;
-	if ((new->ptr = mmap(MMAP_ARG(size))) == -1)
+	if ((new->ptr = mmap(MMAP_ARG(size))) == (void *)-1)
 		return ((void *)-1);
+	printf("c'est bon\n");
+	new->next = NULL;
+	
+	printf("------------------++%ld\n", (long)TINY_SIZE_AREA);
+	printf("------------------++%ld\n", (long)SMALL_SIZE_AREA);
+	check = 0;
+	while (check < size)
+		new->adr_size[check++] = 0;
+
+	printf("c'est bon 2\n");
 	return (fill_tiny_table(new, 0, size));
 }
 

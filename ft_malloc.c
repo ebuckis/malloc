@@ -6,14 +6,22 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:37:50 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 11:34:48 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/09 16:10:52 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-static int  whichType(size_t allocSize)
+size_t			go_to_align_pos(size_t add)
+{
+	size_t	res;
+
+	res = add % ALIGN_POS;
+	res = (res == 0) ? add : add + ALIGN_POS - res;
+	return (res);
+}
+static int  which_type(size_t allocSize)
 {
 	if (allocSize > SMALL_MAX)
 		return (LARGE_TYPE);
@@ -25,44 +33,39 @@ static int  whichType(size_t allocSize)
 
 void		init_ft_malloc(void)
 {
-	static int		isInit = 0;
+	static int		is_init = 0;
 
-	if (isInit)
+	if (is_init)
 		return ;
 	g_stock.large = NULL;
 	g_stock.small = NULL;
 	g_stock.tiny = NULL;
-	isInit = 1;
-}
-// /!\ remplir le tableau en decrémentant
-
-void	*largeAllocation(size_t size)
-{
-	return (ptr);
+	is_init = 1;
 }
 
-void	*searchAndMakeAlloc(size_t size, int type)
+void	*search_and_make_alloc(size_t size, int type)
 {
 	void	*adr;
 
 	if (type == TINY_TYPE)
-		adr = searchInTiny(size, g_stock.tiny);
+		adr = ft_tiny(size);
 	else if (type == SMALL_TYPE)
+		adr = ft_small(size);
 	else
-		return (largeAllocation(size));
-	if (adr != 0)
-		return (adr);
-	if (type == TINY_TYPE)
-		adr = newTinyArea(size);
-	else if (type == SMALL_TYPE)
+		adr = ft_large(size);
+	if (adr == (void *)-1)
+		return (NULL);
 	return (adr);
 }
 
-void 	   *ft_malloc(size_t size)
+void		*ft_malloc(size_t size)
 {
-	void	*ptr;
+	int		type;
 
-	init_malloc();
-
-	return ();
+	if (size == 0)
+		return (NULL);
+	init_ft_malloc();
+	type = which_type(size);
+	printf("size :%d et type : %d\n", size, type);
+	return (search_and_make_alloc(size, type));
 }

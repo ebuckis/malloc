@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 18:32:54 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 13:19:06 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/09 16:25:50 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,24 +26,15 @@ void		*fill_small_table(t_small *lst, size_t i, size_t size)
 	return ((void *)(lst->ptr + i));
 }
 
-size_t			go_to_align_pos(size_t add)
-{
-	size_t	result;
-
-	result = add % ALIGN_POS;
-	result = (result == 0) ? add : add + ALIGN_POS - result;
-	return (result);
-}
-
-void		*search_place_in_small(size_t size, t_small lst)
+void		*search_place_in_small(size_t size, t_small *lst)
 {
 	size_t	i;
 	size_t	j;
 
-	if (lst = NULL)
+	if (lst == NULL)
 		return ((void *)0);
 	i = 0;//hypothese : adresse page % 4096 == 0
-	while (i < small_MAX)
+	while (i < SMALL_MAX)
 	{
 		if (lst->adr_size[i] == 0)/* si la case est vide */
 		{
@@ -74,19 +65,25 @@ void		*new_small_area(size_t size)
 		while (new)
 		{
 			tmp = new;
-			new = new->next
+			new = new->next;
 		}
 	}
 	check = (tmp == new);
-	if ((new = mmap(MMAP_ARG(sizeof(new)))) == -1)
+	if ((new = mmap(MMAP_ARG(sizeof(t_small)))) == (void *)-1)
 		return ((void *)-1);
 	if (check)
 		g_stock.small = new;
 	else
 		tmp->next = new;
 	new->next = NULL;
-	if ((new->ptr = mmap(MMAP_ARG(size))) == -1)
+	if ((new->ptr = mmap(MMAP_ARG(size))) == (void *)-1)
 		return ((void *)-1);
+
+	check = 0;
+	printf("------------------++%ld\n", (long)SMALL_SIZE_AREA);
+	while (check < size)
+		new->adr_size[check++] = 0;
+
 	return (fill_small_table(new, 0, size));
 }
 
