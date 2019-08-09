@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 11:35:12 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/09 13:03:30 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,17 +25,18 @@
 #define	ALIGN_POS		16
 #define TINY_SIZE_AREA	PAGESIZE * ((PAGESIZE / TINY_MAX) + (PAGESIZE % TINY_MAX == 0))
 #define SMALL_SIZE_AREA	PAGESIZE * ((PAGESIZE / SMALL_MAX) + (PAGESIZE % SMALL_MAX == 0))
+#define	MMAP_ARG(size)		NULL, size, PROT_READ | PROT_WRITE,	MAP_PRIVATE | MAP_ANONYMOUS, -1, 0
 
 typedef struct		s_tiny
 {
-	long			adrSize[TINY_SIZE_AREA];
+	long			adr_size[TINY_SIZE_AREA];
 	void			*ptr;
 	struct s_tiny	*next;
 }					t_tiny;
 
 typedef struct		s_small
 {
-	long			adrSize[SMALL_SIZE_AREA];
+	long			adr_size[SMALL_SIZE_AREA];
 	void			*ptr;
 	struct s_small	*next;
 }					t_small;
@@ -46,7 +47,7 @@ typedef struct		s_large
 	struct s_large	*next;
 }					t_large;
 
-typedef struct 		s_stock
+typedef struct		s_stock
 {
 	struct s_large	*large;
 	struct s_small	*small;
