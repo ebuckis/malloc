@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 18:32:54 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 09:16:42 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/09 11:33:35 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ void	*fill_small_table(t_small *lst, size_t i, size_t size)
 	return ((void *)(lst->ptr + i));
 }
 
-void	*search_place_in_small(size_t size, t_small lst)
+void	*search_place_in_small(size_t size)
 {
 	size_t		i;
 	size_t		j;
@@ -34,7 +34,7 @@ void	*search_place_in_small(size_t size, t_small lst)
 	if (lst = NULL)
 		return ((void *)0);
 	i = (size - ((long)lst->ptr % size));/* On va sur une adresse pour l'alignement des variables */
-	while (i < SMALL_MAX)
+	while(i < SMALL_MAX)
 	{
 		if (lst->adrSize[i] == 0)/* si la case est vide */
 		{
@@ -62,11 +62,11 @@ void    *ft_small(size_t size)
 {
 	void    *adr;
 
-	adr = search_place_in_small(size, g_stock.small);
+	adr = search_place_in_small(size);
 	if (adr != 0)
 		return (adr);
 	else
-		adr = new_small_area(size);
+		adr = (size);
 	
 
 }

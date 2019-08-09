@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 09:17:21 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/08/09 11:35:12 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,7 @@
 #define SMALL_MIN		TINY_MAX + 1
 #define SMALL_MAX		127000
 #define LARGE_MIN		SMALL_MAX + 1
+#define	ALIGN_POS		16
 #define TINY_SIZE_AREA	PAGESIZE * ((PAGESIZE / TINY_MAX) + (PAGESIZE % TINY_MAX == 0))
 #define SMALL_SIZE_AREA	PAGESIZE * ((PAGESIZE / SMALL_MAX) + (PAGESIZE % SMALL_MAX == 0))
 
