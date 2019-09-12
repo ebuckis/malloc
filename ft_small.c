@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 18:32:54 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/12 15:44:01 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/12 16:12:33 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,15 +35,18 @@ void		*search_place_in_small(size_t size, t_small *lst)
 	if (lst == NULL)
 		return ((void *)0);
 	i = 0;//hypothese : adresse page % 4096 == 0
-	while (i < SMALL_MAX)
+	j = 0;
+	while (i < SMALL_SIZE_AREA)
 	{
-		if (lst->adr_size[i] == 0)/* si la case est vide */
+		printf("boucle (%d) tab\n", i);
+		if (lst->adr_size[j] == 0)/* si la case est vide */
 		{
-			lst->adr_size[i] = size;
+			printf("adresse + %d \n", i);
+			lst->adr_size[j] = size;
 			return ((void *)(lst->ptr + i));
 		}
-		else	/* Cas ou on a une size */
-			i += SMALL_MAX;
+		i += SMALL_MAX;
+		j++;
 	}
 	return (search_place_in_small(size, lst->next));
 }
@@ -66,27 +69,21 @@ printf("new area\n");
 			new = new->next;
 		}
 	}
-	check = (tmp == g_stock.small);	//sion se trouve sur le premier maillon
+	check = (tmp == g_stock.small);		//sion se trouve sur le premier maillon
 	if (( new = (t_small *)mmap( MMAP_ARG(sizeof(t_small)) ) ) == (void *)-1)//allocation du maillon
 		return ((void *)-1);
-	printf("adress next : %ld\n", (long)new);
-	printf("c'est bon\n");
 	if (check)
 		g_stock.small = new;			//adressage du premier maillon
 	else
-		tmp->next = new;			//adressage autre maillon
+		tmp->next = new;				//adressage autre maillon
 	if ((new->ptr = mmap(MMAP_ARG(SMALL_SIZE_AREA))) == (void *)-1)	//allocation de l'aire
 		return ((void *)-1);
-	printf("c'est bon\n");
-	new->next = NULL;				//dernier a null
-	
-	printf("------------------++%ld\n", (long)SMALL_SIZE_AREA);
-	check = 0;					//utilisation de check comme incrémentation
-	while (check < NB_SMALL)		//peut etre remplacé par bzero
-		new->adr_size[check++] = 0;//remplissage du tableau de 0
-
-	printf("c'est bon 2\n");
-	return (fill_small_table(new, 0, size));//retourne l'adresse de l'aire
+	new->next = NULL;					//dernier a null
+	check = 0;							//utilisation de check comme incrémentation
+	while (check < NB_SMALL)			//peut etre remplacé par bzero
+		new->adr_size[check++] = 0;		//remplissage du tableau de 0
+	new->adr_size[0] = size;
+	return ((void *)(new->ptr));
 }
 
 void		*ft_small(size_t size)
