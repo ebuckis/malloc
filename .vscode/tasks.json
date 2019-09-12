@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "gcc",
+            "args": [
+                "-o",
+                "a.out", // executable
+                "ft_large.c",
+                "ft_small.c",
+                "ft_tiny.c",
+                "main.c",
+                "ft_malloc.c", // main file
+                "-g"
+            ],
+            "type": "shell",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "cq",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }
+    ]
+}
