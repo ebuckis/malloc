@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 18:32:54 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 16:25:50 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/12 15:44:01 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@ void		*fill_small_table(t_small *lst, size_t i, size_t size)
 
 void		*search_place_in_small(size_t size, t_small *lst)
 {
+	printf("search place\n");
 	size_t	i;
 	size_t	j;
 
@@ -38,16 +39,11 @@ void		*search_place_in_small(size_t size, t_small *lst)
 	{
 		if (lst->adr_size[i] == 0)/* si la case est vide */
 		{
-			j = 0;
-			while (j + i < SMALL_MAX && lst->adr_size[i + j] == 0)/* On verifie qu'on a la place */
-				j++;
-			if (j >= size || j + i >= SMALL_MAX)
-				i = i + go_to_align_pos(j);
-			else
-				return (fill_small_table(lst, i, size));
+			lst->adr_size[i] = size;
+			return ((void *)(lst->ptr + i));
 		}
-		else /* Cas ou on a une size */
-			i = i + go_to_align_pos(lst->adr_size[i]);
+		else	/* Cas ou on a une size */
+			i += SMALL_MAX;
 	}
 	return (search_place_in_small(size, lst->next));
 }
@@ -58,7 +54,9 @@ void		*new_small_area(size_t size)
 	t_small	*new;
 	t_small	*tmp;
 
-	if ((new = g_stock.small) == NULL)
+//on va sur le dernier maillon
+printf("new area\n");
+	if ((new = g_stock.small) == NULL)//si rien n'est alloué
 		tmp = new;
 	else
 	{
@@ -68,27 +66,32 @@ void		*new_small_area(size_t size)
 			new = new->next;
 		}
 	}
-	check = (tmp == new);
-	if ((new = mmap(MMAP_ARG(sizeof(t_small)))) == (void *)-1)
+	check = (tmp == g_stock.small);	//sion se trouve sur le premier maillon
+	if (( new = (t_small *)mmap( MMAP_ARG(sizeof(t_small)) ) ) == (void *)-1)//allocation du maillon
 		return ((void *)-1);
+	printf("adress next : %ld\n", (long)new);
+	printf("c'est bon\n");
 	if (check)
-		g_stock.small = new;
+		g_stock.small = new;			//adressage du premier maillon
 	else
-		tmp->next = new;
-	new->next = NULL;
-	if ((new->ptr = mmap(MMAP_ARG(size))) == (void *)-1)
+		tmp->next = new;			//adressage autre maillon
+	if ((new->ptr = mmap(MMAP_ARG(SMALL_SIZE_AREA))) == (void *)-1)	//allocation de l'aire
 		return ((void *)-1);
-
-	check = 0;
+	printf("c'est bon\n");
+	new->next = NULL;				//dernier a null
+	
 	printf("------------------++%ld\n", (long)SMALL_SIZE_AREA);
-	while (check < size)
-		new->adr_size[check++] = 0;
+	check = 0;					//utilisation de check comme incrémentation
+	while (check < NB_SMALL)		//peut etre remplacé par bzero
+		new->adr_size[check++] = 0;//remplissage du tableau de 0
 
-	return (fill_small_table(new, 0, size));
+	printf("c'est bon 2\n");
+	return (fill_small_table(new, 0, size));//retourne l'adresse de l'aire
 }
 
 void		*ft_small(size_t size)
 {
+	printf("SMALL\n");
 	void	*adr;
 	void	*new;
 
