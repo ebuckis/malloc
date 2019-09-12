@@ -6,14 +6,18 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:37:50 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 16:10:52 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/12 09:48:58 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-size_t			go_to_align_pos(size_t add)
+/*
+**	go to the right address
+*/
+
+size_t		go_to_align_pos(size_t add)
 {
 	size_t	res;
 
@@ -21,15 +25,24 @@ size_t			go_to_align_pos(size_t add)
 	res = (res == 0) ? add : add + ALIGN_POS - res;
 	return (res);
 }
-static int  which_type(size_t allocSize)
+
+/*
+** Define the type of allocation
+*/
+
+static int	which_type(size_t alloc_size)
 {
-	if (allocSize > SMALL_MAX)
+	if (alloc_size > SMALL_MAX)
 		return (LARGE_TYPE);
-	else if (allocSize < SMALL_MIN)
+	else if (alloc_size < SMALL_MIN)
 		return (TINY_TYPE);
 	else
 		return (SMALL_TYPE);
 }
+
+/*
+**	initialisation of 3 structures
+*/
 
 void		init_ft_malloc(void)
 {
@@ -43,7 +56,11 @@ void		init_ft_malloc(void)
 	is_init = 1;
 }
 
-void	*search_and_make_alloc(size_t size, int type)
+/*
+**	Redirect in function of size and type
+*/
+
+void		*search_and_make_alloc(size_t size, int type)
 {
 	void	*adr;
 
@@ -58,6 +75,12 @@ void	*search_and_make_alloc(size_t size, int type)
 	return (adr);
 }
 
+/*
+**	init struct
+**	detect the type of element
+**	return adress
+*/
+
 void		*ft_malloc(size_t size)
 {
 	int		type;
@@ -66,6 +89,6 @@ void		*ft_malloc(size_t size)
 		return (NULL);
 	init_ft_malloc();
 	type = which_type(size);
-	printf("size :%d et type : %d\n", size, type);
+	printf("size : %d et type : %d\n", size, type);
 	return (search_and_make_alloc(size, type));
 }

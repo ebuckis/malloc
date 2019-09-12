@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/09 16:40:21 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/12 11:16:35 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,8 +25,8 @@
 #define SMALL_MAX		127
 #define LARGE_MIN		SMALL_MAX + 1
 #define	ALIGN_POS		16
-#define TINY_SIZE_AREA	PAGESIZE * ((PAGESIZE / TINY_MAX) + (PAGESIZE % TINY_MAX == 0))//calculs faux
-#define SMALL_SIZE_AREA	PAGESIZE * ((PAGESIZE / SMALL_MAX) + ((PAGESIZE % SMALL_MAX) == 0))
+#define TINY_SIZE_AREA	4046
+#define SMALL_SIZE_AREA	4046
 #define	MMAP_ARG(size)	NULL, size, PROT_READ | PROT_WRITE,	MAP_PRIVATE | MAP_ANONYMOUS, -1, 0
 
 typedef struct		s_tiny
