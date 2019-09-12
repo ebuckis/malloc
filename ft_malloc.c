@@ -6,7 +6,11 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:37:50 by kcabus       #+#   ##    ##    #+#       */
+<<<<<<< HEAD
 /*   Updated: 2019/09/12 13:06:55 by kcabus      ###    #+. /#+    ###.fr     */
+=======
+/*   Updated: 2019/09/12 13:05:34 by kcabus      ###    #+. /#+    ###.fr     */
+>>>>>>> kevin
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,8 +57,6 @@ void		init_ft_malloc(void)
 	g_stock.large = NULL;
 	g_stock.small = NULL;
 	g_stock.tiny = NULL;
-
-
 	is_init = 1;
 }
 
