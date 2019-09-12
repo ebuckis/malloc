@@ -6,11 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:37:50 by kcabus       #+#   ##    ##    #+#       */
-<<<<<<< HEAD
-/*   Updated: 2019/09/12 13:06:55 by kcabus      ###    #+. /#+    ###.fr     */
-=======
-/*   Updated: 2019/09/12 13:05:34 by kcabus      ###    #+. /#+    ###.fr     */
->>>>>>> kevin
+/*   Updated: 2019/09/12 17:35:22 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -93,6 +89,6 @@ void		*ft_malloc(size_t size)
 		return (NULL);
 	init_ft_malloc();
 	type = which_type(size);
-	printf("size : %d et type : %d\n", size, type);
+	printf("size : %zu et type : %d\n", size, type);
 	return (search_and_make_alloc(size, type));
 }
