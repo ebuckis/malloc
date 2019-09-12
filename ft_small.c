@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 18:32:54 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/12 16:12:33 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/12 16:16:37 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,6 @@ void		*fill_small_table(t_small *lst, size_t i, size_t size)
 
 void		*search_place_in_small(size_t size, t_small *lst)
 {
-	printf("search place\n");
 	size_t	i;
 	size_t	j;
 
@@ -38,7 +37,6 @@ void		*search_place_in_small(size_t size, t_small *lst)
 	j = 0;
 	while (i < SMALL_SIZE_AREA)
 	{
-		printf("boucle (%d) tab\n", i);
 		if (lst->adr_size[j] == 0)/* si la case est vide */
 		{
 			printf("adresse + %d \n", i);
@@ -58,7 +56,7 @@ void		*new_small_area(size_t size)
 	t_small	*tmp;
 
 //on va sur le dernier maillon
-printf("new area\n");
+	printf("new area\n");
 	if ((new = g_stock.small) == NULL)//si rien n'est alloué
 		tmp = new;
 	else
