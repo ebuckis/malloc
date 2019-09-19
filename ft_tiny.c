@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/09 11:24:07 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/12 16:57:12 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/19 10:40:15 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,7 +88,6 @@ void		*ft_tiny(size_t size)
 {
 	printf("TINY\n");
 	void	*adr;
-	void	*new;
 
 	adr = search_place_in_tiny(size, g_stock.tiny);
 	if (adr == 0)
