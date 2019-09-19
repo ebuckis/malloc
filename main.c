@@ -15,6 +15,5 @@ int main()
         fake_malloc = (int *)ft_malloc(sizeof(int) * i);
         printf("fake : |%ld|\n\n", (long)fake_malloc);
     }
-
     return 0;
 }

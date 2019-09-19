@@ -6,25 +6,12 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/09 11:24:07 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/19 10:40:15 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/19 16:21:13 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
-void		*fill_tiny_table(t_tiny *lst, size_t i, size_t size)
-{
-	size_t	lenght;
-
-	lenght = 0;
-	while (lenght < size)
-	{
-		lst->adr_size[i + lenght] = size - lenght;
-		lenght++;
-	}
-	return ((void *)(lst->ptr + i));
-}
 
 void		*search_place_in_tiny(size_t size, t_tiny *lst)
 {
@@ -39,8 +26,9 @@ void		*search_place_in_tiny(size_t size, t_tiny *lst)
 	{
 		if (lst->adr_size[j] == 0)/* si la case est vide */
 		{
-			printf("adresse + %d \n", i);
+			printf("adresse + %zu \n", i);
 			lst->adr_size[j] = size;
+			lst->nbr_alloc++;
 			return ((void *)(lst->ptr + i));
 		}
 		i += TINY_MAX;
@@ -77,6 +65,7 @@ void		*new_tiny_area(size_t size)
 	if ((new->ptr = mmap(MMAP_ARG(TINY_SIZE_AREA))) == (void *)-1)	//allocation de l'aire
 		return ((void *)-1);
 	new->next = NULL;					//dernier a null
+	new->nbr_alloc = 0;
 	check = 0;							//utilisation de check comme incrémentation
 	while (check < NB_TINY)			//peut etre remplacé par bzero
 		new->adr_size[check++] = 0;		//remplissage du tableau de 0

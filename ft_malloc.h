@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/12 15:01:51 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/19 14:51:19 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <sys/mman.h>
 
-#define PAGESIZE		4096
+#define PAGESIZE		getpagesize()
 #define TINY_TYPE		1
 #define SMALL_TYPE		2
 #define LARGE_TYPE		3
@@ -33,14 +33,16 @@
 
 typedef struct		s_tiny
 {
-	long			adr_size[NB_TINY];
+	int				adr_size[NB_TINY];
+	int				nbr_alloc;
 	void			*ptr;
 	struct s_tiny	*next;
 }					t_tiny;
 
 typedef struct		s_small
 {
-	long			adr_size[NB_SMALL];
+	int				adr_size[NB_SMALL];
+	int				nbr_alloc;
 	void			*ptr;
 	struct s_small	*next;
 }					t_small;
