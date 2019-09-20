@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/19 14:51:19 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/20 11:53:38 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,9 +62,19 @@ typedef struct		s_stock
 }					t_stock;
 
 t_stock				g_stock;
-
+/*
+** Malloc
+*/
 void		*ft_malloc(size_t size);
 void		*ft_tiny(size_t size);
 void		*ft_small(size_t size);
 void		*ft_large(size_t size);
 size_t		go_to_align_pos(size_t add);
+/*
+**	Free
+*/
+void	ft_free(void *ptr);
+int		ft_free_in_tiny(void *ptr);
+int		ft_free_in_small(void *ptr);
+
+void	ft_display(void);

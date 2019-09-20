@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_free_tiny.c                                   .::    .:/ .      .::   */
+/*   ft_free_small.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -15,51 +15,51 @@
 
 static int	ft_other_lst(void)
 {
-	t_tiny	*new;
+	t_small	*new;
 
-	if (!g_stock.tiny)
+	if (!g_stock.small)
 		return (0);
-	if (g_stock.tiny->next)
+	if (g_stock.small->next)
 		return (1);
 	return (0);
 }
 
-static void	ft_lst_manage(t_tiny * lst)
+static void	ft_lst_manage(t_small * lst)
 {
-	t_tiny	*prev;
-	t_tiny	*post;
+	t_small	*prev;
+	t_small	*post;
 
-	if (lst == g_stock.tiny)
+	if (lst == g_stock.small)
 	{
-		post = g_stock.tiny->next;
-		munmap(g_stock.tiny, sizeof(t_tiny *));
-		g_stock.tiny = post;
+		post = g_stock.small->next;
+		munmap(g_stock.small, sizeof(t_small *));
+		g_stock.small = post;
 	}
 	else
 	{
-		prev = g_stock.tiny;
+		prev = g_stock.small;
 		while (prev->next != lst)
 			prev = prev->next;
 		post = lst->next;
-		munmap(lst, sizeof(t_tiny *));
+		munmap(lst, sizeof(t_small *));
 		prev->next = post;
 	}
 }
 
-static int	search_in_this_page(t_tiny *lst, void *ptr)
+static int	search_in_this_page(t_small *lst, void *ptr)
 {
 	int		diff;
 
 	diff = (unsigned long)ptr - (unsigned long)lst->ptr;
-	diff /= TINY_MAX;
-	if (diff <= NB_TINY && lst->adr_size[diff] != 0)
+	diff /= SMALL_MAX;
+	if (diff <= NB_SMALL && lst->adr_size[diff] != 0)
 	{
 		lst->adr_size[diff] = 0;
 		lst->nbr_alloc--;
 		if (lst->nbr_alloc == 0 && ft_other_lst())
 		{
 			/* On free la page et on joue avec la liste chainée */
-			munmap(ptr, TINY_SIZE_AREA);
+			munmap(ptr, SMALL_SIZE_AREA);
 			ft_lst_manage(lst);
 		}
 		return (1);
@@ -67,18 +67,18 @@ static int	search_in_this_page(t_tiny *lst, void *ptr)
 	return (0);
 }
 
-int		ft_free_in_tiny(void *ptr)
+int		ft_free_in_small(void *ptr)
 {
-	t_tiny	*l;
-	t_tiny	*tmp;
+	t_small	*l;
+	t_small	*tmp;
 
-	if (!g_stock.tiny || (unsigned long)ptr % TINY_MAX != 0)
+	if (!g_stock.small || (unsigned long)ptr % SMALL_MAX != 0)
 		return (0);
-	l = g_stock.tiny;
+	l = g_stock.small;
 	while (l)
 	{
 		if ((unsigned long)ptr >= (unsigned long)l->ptr &&
-			(unsigned long)ptr < (unsigned long)l->ptr + TINY_SIZE_AREA )
+			(unsigned long)ptr < (unsigned long)l->ptr + SMALL_SIZE_AREA )
 		{
 			// On se trouve sur la bonne page
 			if (!search_in_this_page(l, ptr))

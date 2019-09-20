@@ -11,6 +11,10 @@
                 "ft_small.c",
                 "ft_tiny.c",
                 "main.c",
+                "ft_free.c",
+                "ft_free_tiny.c",
+                "ft_free_small.c",
+                "ft_display.c",
                 "ft_malloc.c", // main file
                 "-g"
             ],

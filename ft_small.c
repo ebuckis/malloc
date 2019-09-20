@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 18:32:54 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/19 16:21:23 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/20 12:19:34 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,10 +55,9 @@ void		*new_small_area(size_t size)
 			new = new->next;
 		}
 	}
-	check = (tmp == g_stock.small);		//sion se trouve sur le premier maillon
 	if (( new = (t_small *)mmap( MMAP_ARG(sizeof(t_small)) ) ) == (void *)-1)//allocation du maillon
 		return ((void *)-1);
-	if (check)
+	if (g_stock.small == NULL)		//sion se trouve sur le premier maillon
 		g_stock.small = new;			//adressage du premier maillon
 	else
 		tmp->next = new;				//adressage autre maillon
@@ -70,6 +69,7 @@ void		*new_small_area(size_t size)
 	while (check < NB_SMALL)			//peut etre remplacé par bzero
 		new->adr_size[check++] = 0;		//remplissage du tableau de 0
 	new->adr_size[0] = size;
+	new->nbr_alloc++;
 	return ((void *)(new->ptr));
 }
 
