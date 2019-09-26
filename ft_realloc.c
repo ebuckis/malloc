@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:36:12 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/08 13:36:16 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/26 16:07:41 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,5 +15,6 @@
 
 void    *ft_realloc(void *ptr, size_t size)
 {
-
+	ft_free(ptr);
+	ptr = ft_malloc(size);
 }

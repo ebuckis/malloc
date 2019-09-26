@@ -20,7 +20,7 @@ int main()
         }
         //printf("fake : |%ld|\n\n", (long)fake_malloc);
     }
-    ft_display();
+ //   ft_display();
    /*
 	real_malloc = malloc(6);
 	real_malloc[0] = 's';

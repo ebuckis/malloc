@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_free_small.c                                   .::    .:/ .      .::   */
+/*   ft_free_small.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/19 17:20:04 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/20 10:56:33 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Created: 2019/09/26 15:07:43 by kcabus       #+#   ##    ##    #+#       */
+/*   Updated: 2019/09/26 15:07:46 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,7 @@ static int	ft_other_lst(void)
 	return (0);
 }
 
-static void	ft_lst_manage(t_small * lst)
+static void	ft_lst_manage(t_small *lst)
 {
 	t_small	*prev;
 	t_small	*post;
@@ -58,7 +58,6 @@ static int	search_in_this_page(t_small *lst, void *ptr)
 		lst->nbr_alloc--;
 		if (lst->nbr_alloc == 0 && ft_other_lst())
 		{
-			/* On free la page et on joue avec la liste chainée */
 			munmap(ptr, SMALL_SIZE_AREA);
 			ft_lst_manage(lst);
 		}
@@ -67,7 +66,7 @@ static int	search_in_this_page(t_small *lst, void *ptr)
 	return (0);
 }
 
-int		ft_free_in_small(void *ptr)
+int			ft_free_in_small(void *ptr)
 {
 	t_small	*l;
 	t_small	*tmp;
@@ -78,22 +77,11 @@ int		ft_free_in_small(void *ptr)
 	while (l)
 	{
 		if ((unsigned long)ptr >= (unsigned long)l->ptr &&
-			(unsigned long)ptr < (unsigned long)l->ptr + SMALL_SIZE_AREA )
+			(unsigned long)ptr < (unsigned long)l->ptr + SMALL_SIZE_AREA)
 		{
-			// On se trouve sur la bonne page
-			if (!search_in_this_page(l, ptr))
-			{
-                // error
-				// pas de pointeur aloué sur cette plage d'adresse
-				return (0);
-			}
-			else
-			{
-				return (1);
-			}
-			
+			return (search_in_this_page(l, ptr));
 		}
 		l = l->next;
 	}
-	return (1);
+	return (0);
 }

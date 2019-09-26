@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/20 11:53:38 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/26 11:21:08 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,5 +76,6 @@ size_t		go_to_align_pos(size_t add);
 void	ft_free(void *ptr);
 int		ft_free_in_tiny(void *ptr);
 int		ft_free_in_small(void *ptr);
+int		ft_free_in_large(void *ptr);
 
 void	ft_display(void);
