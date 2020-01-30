@@ -37,7 +37,8 @@ typedef	enum		e_mallocType
 
 typedef struct		s_alloc
 {
-	int				size;
+	int				is_alloc;
+	size_t			size;
 	struct s_alloc	*next;
 	struct s_alloc	*prev;
 }					t_alloc;
