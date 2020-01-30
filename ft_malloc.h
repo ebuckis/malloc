@@ -16,9 +16,6 @@
 #include <sys/mman.h>
 
 #define PAGESIZE		getpagesize()
-#define TINY_TYPE		1
-#define SMALL_TYPE		
-#define LARGE_TYPE		32
 #define TINY_MIN		1
 #define TINY_MAX		16
 #define SMALL_MIN		TINY_MAX + 1
@@ -31,6 +28,12 @@
 #define NB_SMALL		SMALL_SIZE_AREA / SMALL_MAX
 #define	MMAP_ARG(size)	NULL, size, PROT_READ | PROT_WRITE,	MAP_PRIVATE | MAP_ANONYMOUS, -1, 0
 
+typedef	enum		e_mallocType
+{
+	e_tiny_type = 0;
+	e_small_type,
+	e_large_type
+};
 
 typedef struct		s_alloc
 {
@@ -43,10 +46,10 @@ typedef struct		s_page
 {
 	int				size;
 	int				type;
+	t_alloc			alloc;
 	struct s_page	*prev;
 	struct s_page	*next;
-	
-	/* data */
+
 }					t_page;
 
 typedef struct		s_stock
@@ -61,16 +64,8 @@ t_stock				g_stock;
 ** Malloc
 */
 void		*ft_malloc(size_t size);
-void		*ft_tiny(size_t size);
-void		*ft_small(size_t size);
-void		*ft_large(size_t size);
-size_t		go_to_align_pos(size_t add);
+
 /*
 **	Free
 */
 void	ft_free(void *ptr);
-int		ft_free_in_tiny(void *ptr);
-int		ft_free_in_small(void *ptr);
-int		ft_free_in_large(void *ptr);
-
-void	ft_display(void);
