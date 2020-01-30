@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/26 11:21:08 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/30 17:51:38 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,8 +17,8 @@
 
 #define PAGESIZE		getpagesize()
 #define TINY_TYPE		1
-#define SMALL_TYPE		2
-#define LARGE_TYPE		3
+#define SMALL_TYPE		
+#define LARGE_TYPE		32
 #define TINY_MIN		1
 #define TINY_MAX		16
 #define SMALL_MIN		TINY_MAX + 1
@@ -31,34 +31,29 @@
 #define NB_SMALL		SMALL_SIZE_AREA / SMALL_MAX
 #define	MMAP_ARG(size)	NULL, size, PROT_READ | PROT_WRITE,	MAP_PRIVATE | MAP_ANONYMOUS, -1, 0
 
-typedef struct		s_tiny
-{
-	int				adr_size[NB_TINY];
-	int				nbr_alloc;
-	void			*ptr;
-	struct s_tiny	*next;
-}					t_tiny;
 
-typedef struct		s_small
+typedef struct		s_alloc
 {
-	int				adr_size[NB_SMALL];
-	int				nbr_alloc;
-	void			*ptr;
-	struct s_small	*next;
-}					t_small;
+	int				size;
+	struct s_alloc	*next;
+	struct s_alloc	*prev;
+}					t_alloc;
 
-typedef struct		s_large
+typedef struct		s_page 
 {
-	size_t			size;
-	void			*ptr;
-	struct s_large	*next;
-}					t_large;
+	int				size;
+	int				type;
+	struct s_page	*prev;
+	struct s_page	*next;
+	
+	/* data */
+}					t_page;
 
 typedef struct		s_stock
 {
-	struct s_large	*large;
-	struct s_small	*small;
-	struct s_tiny	*tiny;
+	t_page			*large;
+	t_page			*small;
+	t_page			*tiny;
 }					t_stock;
 
 t_stock				g_stock;
