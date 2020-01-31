@@ -18,11 +18,11 @@ void			*malloc_search_area(size_t size)
 	void		*ptr;
 
 	if (size + sizeof(t_page) <= TINY_MAX)
-		ptr = little_alloc(g_stock.tiny, e_tiny_type);
+		ptr = little_alloc(g_stock.tiny, e_tiny_type, size);
 	else if (size + sizeof(t_page) <= SMALL_MAX)
-		ptr = little_alloc(g_stock.small, e_small_type);
+		ptr = little_alloc(g_stock.small, e_small_type, size);
 	else
-		ptr = large_alloc(g_stock.large, e_large_type);
+		;//ptr = large_alloc(g_stock.large, e_large_type);
 	return (ptr);
 }
 

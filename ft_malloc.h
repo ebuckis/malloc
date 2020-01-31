@@ -17,6 +17,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <sys/mman.h>
+#include <unistd.h>
 
 #define TINY_MIN		1
 #define TINY_MAX		16
@@ -66,6 +67,9 @@ t_stock				g_stock;
 ** Malloc
 */
 void		*ft_malloc(size_t size);
+void		*little_alloc(t_page *page, int type, size_t size);
+t_alloc		*alloc_init(t_alloc *new);
+void		*alloc_find_place(t_page *page, size_t size);
 
 /*
 **	Free
