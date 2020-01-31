@@ -6,14 +6,14 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:37:51 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 13:16:27 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 14:08:28 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-size_t		get_size_allign(size_t size)
+size_t		get_size_align(size_t size)
 {
 	size_t	ret;
 

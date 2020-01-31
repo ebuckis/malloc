@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 13:18:59 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 14:08:31 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,5 +71,10 @@ void		*ft_malloc(size_t size);
 **	Free
 */
 void	ft_free(void *ptr);
+
+
+size_t	get_size_align(size_t size);
+int		get_size_alloc(int type);
+int		get_size_page(int type);
 
 #endif
