@@ -17,8 +17,6 @@ void	*alloc_find_place(t_page *page, size_t size)
 {
 	t_alloc	*tmp;
 
-	if (page->is_full == 1)
-		return (NULL);
 	tmp = page->alloc;
 	while (tmp->is_alloc)
 	{

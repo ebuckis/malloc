@@ -16,7 +16,6 @@
 static t_page	*little_new_page(t_page *new, int type)
 {
 	//TODO: alloc nmap
-	new->is_full = 0;
 	new->type = type;
 	new->next = NULL;
 	new->alloc = (t_alloc *)(new + sizeof(t_page));

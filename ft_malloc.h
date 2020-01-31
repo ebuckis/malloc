@@ -48,7 +48,6 @@ typedef struct		s_alloc
 
 typedef struct		s_page 
 {
-	short			is_full;
 	int				type;
 	t_alloc			*alloc;
 	struct s_page	*next;

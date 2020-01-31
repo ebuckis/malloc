@@ -15,18 +15,22 @@
 
 int main(void)
 {
-	int a, b, c, d, e;
+	int a, b, c, d, e, f;
 
 	a = sizeof(size_t);
 	b = sizeof(t_stock);
 	c = sizeof(t_page);
 	d = sizeof(t_alloc);
 	e = sizeof(short);
+	f = sizeof(void *);
 
 	printf("size t : %d\n", a);
+	a = sizeof(int);
+	printf("int : %d\n", a);
 	printf("stock : %d\n",b);
 	printf("page : %d\n", c);
 	printf("alloc : %d\n", d);
 	printf("short : %d\n", e);
+	printf("ptr : %d\n", f);
 	return 0;
 }
