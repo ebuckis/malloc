@@ -15,7 +15,9 @@
 
 static t_page	*little_new_page(t_page *new, int type)
 {
-	//TODO: alloc nmap
+	//TODO: alloc nmap 
+	if (!(new = mmap(NULL, get_size_page(type), MMAP_ARG)))
+		return (NULL);
 	new->type = type;
 	new->next = NULL;
 	new->alloc = (t_alloc *)(new + sizeof(t_page));
