@@ -41,15 +41,15 @@ typedef struct		s_alloc
 	void			*ptr;
 	size_t			size;
 	struct s_alloc	*next;
-	struct s_alloc	*prev;
 }					t_alloc;
 
 typedef struct		s_page 
 {
-	int				size;
+	int				is_full;
+	int				page_size;
+	int				alloc_size;
 	int				type;
 	t_alloc			alloc;
-	struct s_page	*prev;
 	struct s_page	*next;
 
 }					t_page;
