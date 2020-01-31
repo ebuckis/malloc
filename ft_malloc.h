@@ -6,16 +6,18 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/30 17:51:38 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 13:18:59 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
+
+#ifndef		MALLOC_H
+#define		MALLOC_H
 
 #include <string.h>
 #include <stdio.h>
 #include <sys/mman.h>
 
-#define PAGESIZE		getpagesize()
 #define TINY_MIN		1
 #define TINY_MAX		16
 #define SMALL_MIN		TINY_MAX + 1
@@ -30,26 +32,24 @@
 
 typedef	enum		e_mallocType
 {
-	e_tiny_type = 0;
+	e_tiny_type = 0,
 	e_small_type,
 	e_large_type
-};
+}				e_mallocType;
 
 typedef struct		s_alloc
 {
-	int				is_alloc;
-	void			*ptr;
+	short			is_alloc;
 	size_t			size;
+	void			*ptr;
 	struct s_alloc	*next;
 }					t_alloc;
 
 typedef struct		s_page 
 {
-	int				is_full;
-	int				page_size;
-	int				alloc_size;
+	short			is_full;
 	int				type;
-	t_alloc			alloc;
+	t_alloc			*alloc;
 	struct s_page	*next;
 
 }					t_page;
@@ -71,3 +71,5 @@ void		*ft_malloc(size_t size);
 **	Free
 */
 void	ft_free(void *ptr);
+
+#endif
