@@ -5,8 +5,10 @@ int main()
 	char	*test;
 
 	test = NULL;
-	for (int i = 0; i < 250; i++)
+	for (int i = 0; i < 1000; i++)
 	{
+		if (i % 250 == 0)
+			sleep(1);
 		test = (char *)ft_malloc(sizeof(char)*17);
 		printf("|%p|\n", test);
 	}

@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 11:11:42 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 12:41:10 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,7 +61,7 @@ t_stock				g_stock;
 void		*ft_malloc(size_t size);
 t_page		*little_new_page(t_page *new, int type);
 void		*little_alloc(t_page *page, int type, size_t size);
-t_alloc		*alloc_init(t_alloc *new);
+t_alloc		*alloc_init(t_alloc *new, size_t last_ad);
 void		*alloc_find_place(t_page *page, size_t size);
 
 /*
@@ -72,6 +72,6 @@ void	ft_free(void *ptr);
 
 size_t	get_size_align(size_t size);
 int		get_size_alloc(int type);
-int		get_size_page(int type);
+size_t	get_size_page(int type);
 
 #endif

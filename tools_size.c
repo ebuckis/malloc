@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:37:51 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 10:43:54 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 11:48:49 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,10 +33,10 @@ int		get_size_alloc(int type)
 	return (0);
 }
 
-int		get_size_page(int type)
+size_t		get_size_page(int type)
 {
-	static int	small_size = 0;
-	static int	tiny_size = 0;
+	static size_t	small_size = 0;
+	static size_t	tiny_size = 0;
 
 	if (type == e_small_type)
 	{

@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 13:38:22 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 11:31:23 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 12:41:45 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ t_page	*little_new_page(t_page *new, int type)
 	new->type = type;
 	new->next = NULL;
 	new->alloc = (t_alloc *)new + sizeof(t_page);
-	new->alloc = alloc_init(new->alloc);
+	new->alloc = alloc_init(new->alloc, (size_t)new + get_size_page(new->type));
 	return (new);
 }
 
