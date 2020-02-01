@@ -5,11 +5,11 @@ int main()
 	char	*test;
 
 	test = NULL;
-	for (int i = 0; i < 1000; i++)
+	for (int i = 0; i < 2000; i++)
 	{
-		test = (char *)ft_malloc(sizeof(char)*17);
+		test = (char *)ft_malloc(sizeof(char)*100);
 		printf("|%p|\n", test);
-	}
+	}/*
 			sleep(1);
 	for (int i = 0; i < 1000; i++)
 	{
@@ -21,8 +21,9 @@ int main()
 	{
 		test = (char *)ft_malloc(sizeof(char)*12700);
 		printf("|%p|\n", test);
-	}
+	}*/
 
+	ft_display();
 
 	if (!g_stock.large)
 		printf("large null\n");
