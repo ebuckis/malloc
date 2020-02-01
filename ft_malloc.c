@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 11:22:20 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 11:09:54 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 14:26:13 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,23 +20,24 @@ void			*malloc_search_area(size_t size)
 	if (size + sizeof(t_page) <= TINY_MAX)
 	{
 		if (!g_stock.tiny)
-		{
 			if (!(g_stock.tiny = little_new_page(g_stock.tiny, e_tiny_type)))
 				return (NULL);
-		}
 		ptr = little_alloc(g_stock.tiny, e_tiny_type, size);
 	}
 	else if (size + sizeof(t_page) <= SMALL_MAX)
 	{
 		if (!g_stock.small)
-		{
 			if (!(g_stock.small = little_new_page(g_stock.small, e_small_type)))
 				return (NULL);
-		}
 		ptr = little_alloc(g_stock.small, e_small_type, size);
 	}
 	else
-		;//ptr = large_alloc(g_stock.large, e_large_type);
+	{
+		if (!g_stock.large)
+			if (!(g_stock.large = large_new_page(g_stock.large, size)))
+				return (NULL);
+		ptr = large_alloc(g_stock.large, size);
+	}
 	return (ptr);
 }
 

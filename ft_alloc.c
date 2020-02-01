@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/01 10:46:30 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 12:48:25 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 13:48:54 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ t_alloc		*alloc_init(t_alloc *new, size_t last_ad)
 	if (last_ad < (size_t)new->ptr)
 		new->size = 0;
 	else
-		new->size = last_ad - (size_t)new->ptr;
+		new->size = last_ad - (size_t)new->ptr;//TODO: verify if it works
 	return (new);
 }
 
@@ -44,7 +44,6 @@ void	*alloc_find_place(t_page *page, size_t size)
 			tmp->next = tmp->ptr + tmp->size;
 			tmp->next = alloc_init(tmp->next, (size_t)page + get_size_page(page->type));
 		}
-		
 		tmp = tmp->next;
 	}
 	tmp->size = get_size_align(size);
