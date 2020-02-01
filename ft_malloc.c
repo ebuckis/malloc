@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 11:22:20 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 11:23:27 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 11:09:54 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,6 @@
 
 void			*malloc_search_area(size_t size)
 {
-	printf("start -> %s\n", __func__);
 	void		*ptr;
 
 	if (size + sizeof(t_page) <= TINY_MAX)
@@ -58,7 +57,6 @@ void			malloc_init(void)
 
 void			*ft_malloc(size_t size)
 {
-	printf("start -> %s\n", __func__);
 	if (size < 1)
 		return (NULL);
 	malloc_init();

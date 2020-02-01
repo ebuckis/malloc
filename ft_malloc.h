@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 14:08:31 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 11:11:42 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,10 +19,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-#define TINY_MIN		1
-#define TINY_MAX		16
-#define SMALL_MIN		TINY_MAX + 1
-#define SMALL_MAX		128
+#define TINY_MAX		128
+#define SMALL_MAX		4096
 #define LARGE_MIN		SMALL_MAX + 1
 #define	MMAP_ARG		PROT_READ | PROT_WRITE,	MAP_PRIVATE | MAP_ANONYMOUS, -1, 0
 

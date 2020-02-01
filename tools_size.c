@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:37:51 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 14:08:28 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 10:43:54 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ size_t		get_size_align(size_t size)
 	ret = size % 16;
 	if (ret == 0)
 		return (size);
-	ret = 16 * (ret + 1);
+	ret = 16 * ((size / 16) + 1);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:06:52 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 10:10:29 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 11:04:21 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,5 +32,6 @@ int main(void)
 	printf("alloc : %d\n", d);
 	printf("short : %d\n", e);
 	printf("ptr : %d\n", f);
+	
 	return 0;
 }

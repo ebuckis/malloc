@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 13:38:22 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 13:56:16 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 11:31:23 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,14 +21,13 @@ t_page	*little_new_page(t_page *new, int type)
 		return (NULL);
 	new->type = type;
 	new->next = NULL;
-	new->alloc = (t_alloc *)(new + sizeof(t_page));
+	new->alloc = (t_alloc *)new + sizeof(t_page);
 	new->alloc = alloc_init(new->alloc);
 	return (new);
 }
 
 void	*little_alloc(t_page *page, int type, size_t size)
 {
-	printf("start -> %s\n", __func__);
 	void	*ptr;
 
 	ptr = NULL;
@@ -37,9 +36,12 @@ void	*little_alloc(t_page *page, int type, size_t size)
 	ptr = alloc_find_place(page, size);
 	if (ptr == NULL)// ->recursive sur page ->next
 	{
-		printf("Plus de place, nouvelle page\n");
-		if (!(page->next = little_new_page(page->next, type)))
-			return (NULL);
+		if (page->next == NULL)
+		{
+			printf("Plus de place, nouvelle page\n");
+			if (!(page->next = little_new_page(page->next, type)))
+				return (NULL);
+		}
 		return (little_alloc(page->next, type, size));
 	}
 	return (ptr);
