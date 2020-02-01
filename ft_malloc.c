@@ -15,12 +15,27 @@
 
 void			*malloc_search_area(size_t size)
 {
+	printf("start -> %s\n", __func__);
 	void		*ptr;
 
 	if (size + sizeof(t_page) <= TINY_MAX)
+	{
+		if (!g_stock.tiny)
+		{
+			if (!(g_stock.tiny = little_new_page(g_stock.tiny, e_tiny_type)))
+				return (NULL);
+		}
 		ptr = little_alloc(g_stock.tiny, e_tiny_type, size);
+	}
 	else if (size + sizeof(t_page) <= SMALL_MAX)
+	{
+		if (!g_stock.small)
+		{
+			if (!(g_stock.small = little_new_page(g_stock.small, e_small_type)))
+				return (NULL);
+		}
 		ptr = little_alloc(g_stock.small, e_small_type, size);
+	}
 	else
 		;//ptr = large_alloc(g_stock.large, e_large_type);
 	return (ptr);
@@ -32,15 +47,18 @@ void			malloc_init(void)
 
 	if (!is_init)
 	{
+		printf("start -> %s\n", __func__);
 		g_stock.tiny = NULL;
 		g_stock.small = NULL;
 		g_stock.large = NULL;
+		is_init = 1;
 	}
 }
 
 
 void			*ft_malloc(size_t size)
 {
+	printf("start -> %s\n", __func__);
 	if (size < 1)
 		return (NULL);
 	malloc_init();

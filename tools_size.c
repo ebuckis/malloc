@@ -46,7 +46,6 @@ int		get_size_page(int type)
 			small_size = ((small_size / getpagesize()) + 1) * getpagesize();
 		}
 		return (small_size);
-		
 	}
 	else if (type == e_tiny_type)
 	{
