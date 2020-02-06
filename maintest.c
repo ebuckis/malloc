@@ -4,26 +4,19 @@ int main()
 {
 	char	*test;
 	char	*truc[500];
+	size_t i = 2;
 
-	test = NULL;
-	for (int i = 0; i < 500; i++)
+	while (1)
 	{
-		truc[i] = (char *)ft_malloc(sizeof(char)*90);
+		test = ft_malloc(i);
+		printf("--->%zu\n", i);
+		printf("--->%p\n", test);
+		ft_free(test);
+		i *= 2;
+		if (i == 0)
+			return 1;
 	}
-	for (int i = 0; i < 500; i++)
-	{
-		ft_free(truc[i]);
-	}
-
-	for (int i = 0; i < 500; i++)
-	{
-		truc[i] = (char *)ft_malloc(sizeof(char)*4000);
-	}
-	for (int i = 0; i < 400; i++)
-	{
-		ft_free(truc[i]);
-	}
-
+	
 /*
 	for (int i = 0; i < 10; i++)
 	{

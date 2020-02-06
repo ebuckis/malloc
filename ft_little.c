@@ -15,7 +15,6 @@
 
 t_page	*little_new_page(t_page *new, int type)
 {
-	printf("start -> %s\n", __func__);
 	if (!(new = mmap(NULL, get_size_page(type), MMAP_ARG)))
 		return (NULL);
 	new->size = get_size_page(type);

@@ -77,8 +77,11 @@ static int		free_in_page(void *ptr, t_page *page)
 
 void	ft_free(void *ptr)
 {
-	if (free_in_page(ptr, g_stock.tiny) ||
-		free_in_page(ptr, g_stock.small) ||
-		free_in_page(ptr, g_stock.large))
-		;
+	if (ptr)
+	{
+		if (free_in_page(ptr, g_stock.tiny) ||
+			free_in_page(ptr, g_stock.small) ||
+			free_in_page(ptr, g_stock.large))
+			;
+	}
 }

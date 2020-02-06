@@ -15,12 +15,12 @@
 
 t_page		*large_new_page(t_page *new, size_t size)
 {
-	printf("start -> %s\n", __func__);
 	size_t	total;
 
 	total = get_size_align(size)
-		+ get_size_align(sizeof(t_page) + sizeof(t_alloc));
-	if (!(new = mmap(NULL, total, MMAP_ARG)))
+		+ sizeof(t_page) + sizeof(t_alloc);
+	new = mmap(NULL, total, MMAP_ARG);
+	if (!new || new == 0xFFFFFFFFFFFFFFFF)
 		return (NULL);
 	new->size = total;
 	new->type = e_large_type;
