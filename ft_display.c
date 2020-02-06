@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/20 11:42:29 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 14:55:04 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 10:14:53 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,15 +21,12 @@ char 	*bool_print(short val)
 		return ("false");
 }
 
-void	ft_display(void)
+void	display_list(t_page *tmp_page)
 {
-	int i, j;
-	t_page	*tmp_page;
-	t_alloc	*tmp_alloc;
+	int i;
 
 	i = 1;
-	tmp_page = g_stock.tiny;
-	printf("********************TINY********************\n");
+	t_alloc	*tmp_alloc;
 	while (tmp_page)
 	{
 		printf("__________________________\n");
@@ -49,7 +46,20 @@ void	ft_display(void)
 		tmp_page = tmp_page->next;
 		i++;
 	}
+}
+
+
+void	ft_display(void)
+{
+	printf("********************TINY********************\n");
+	display_list(g_stock.tiny);
 	printf("********************************************\n\n");
+	printf("********************SMALL********************\n");
+	display_list(g_stock.small);
+	printf("*********************************************\n\n");
+	printf("********************LARGE********************\n");
+	display_list(g_stock.large);
+	printf("*********************************************\n\n");
 
 
 //	tmp_page = g_stock.small;

@@ -5,23 +5,21 @@ int main()
 	char	*test;
 
 	test = NULL;
-	for (int i = 0; i < 2000; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		test = (char *)ft_malloc(sizeof(char)*100);
 		printf("|%p|\n", test);
-	}/*
-			sleep(1);
-	for (int i = 0; i < 1000; i++)
+	}
+	for (int i = 0; i < 10; i++)
 	{
 		test = (char *)ft_malloc(sizeof(char)*127);
 		printf("|%p|\n", test);
 	}
-			sleep(1);
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		test = (char *)ft_malloc(sizeof(char)*12700);
 		printf("|%p|\n", test);
-	}*/
+	}
 
 	ft_display();
 
