@@ -6,54 +6,60 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/20 11:42:29 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 14:58:30 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 17:21:30 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-char 	*bool_print(short val)
+static void		ft_print_alloc(t_alloc *tmp)
 {
-	if (val)
-		return ("Used");
-	else
-		return ("Free");
+	if (!tmp)
+		return ;
+	ft_putaddress((size_t)tmp->ptr);
+	ft_putstr(" - ");
+	ft_putaddress((size_t)tmp->ptr + tmp->size);
+	ft_putstr(" : ");
+	ft_putnb(tmp->size);
+	ft_putstr(" octets\n");
 }
 
-void	display_list(t_page *tmp_page)
+static size_t	show_page_alloc(char *title, t_page *page)
 {
-	int i;
+	t_alloc		*tmp_alloc;
+	t_page		*tmp;
+	size_t		size;
 
-	i = 1;
-	t_alloc	*tmp_alloc;
-	while (tmp_page)
+	size = 0;
+	tmp = page;
+	while (tmp)
 	{
-		printf("_____________________________________________\n");
-		printf("|	Page n%d\n", i);
-		printf("|%p - %p|\n", (void *)tmp_page, (void *)((size_t)tmp_page + tmp_page->size));
-		printf("_____________________________________________\n");
-		tmp_alloc = tmp_page->alloc;
+		ft_putstr(title);
+		ft_putaddress((size_t)tmp);
+		ft_putstr("\n");
+		tmp_alloc = tmp->alloc;
 		while (tmp_alloc)
 		{
-			printf("%p - %p : %zu -> %s\n", tmp_alloc->ptr, (void *)((size_t)tmp_alloc->ptr + tmp_alloc->size), tmp_alloc->size, bool_print(tmp_alloc->is_alloc));
+			ft_print_alloc(tmp_alloc);
+			if (tmp_alloc->is_alloc)
+				size += tmp_alloc->size;
 			tmp_alloc = tmp_alloc->next;
 		}
-		printf("_____________________________________________\n");
-		tmp_page = tmp_page->next;
-		i++;
+		tmp = tmp->next;
 	}
+	return (size);
 }
 
-void	ft_display(void)
+void			show_alloc_mem(void)
 {
-	printf("********************TINY********************\n");
-	display_list(g_stock.tiny);
-	printf("********************************************\n\n");
-	printf("********************SMALL********************\n");
-	display_list(g_stock.small);
-	printf("*********************************************\n\n");
-	printf("********************LARGE********************\n");
-	display_list(g_stock.large);
-	printf("*********************************************\n\n");
+	size_t	size;
+
+	size = 0;
+	size += show_page_alloc("TINY : ", g_stock.tiny);
+	size += show_page_alloc("SMALL : ", g_stock.small);
+	size += show_page_alloc("LARGE : ", g_stock.large);
+	ft_putstr("Total : ");
+	ft_putnb(size);
+	ft_putstr(" octets\n");
 }

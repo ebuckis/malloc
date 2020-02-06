@@ -15,6 +15,14 @@ int main()
 		ft_free(truc[i]);
 	}
 
+	for (int i = 0; i < 500; i++)
+	{
+		truc[i] = (char *)ft_malloc(sizeof(char)*4000);
+	}
+	for (int i = 0; i < 400; i++)
+	{
+		ft_free(truc[i]);
+	}
 
 /*
 	for (int i = 0; i < 10; i++)
@@ -28,7 +36,7 @@ int main()
 		printf("|%p|\n", test);
 	}*/
 
-	ft_display();
+	show_alloc_mem();
 
 	return 0;
 }
