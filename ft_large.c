@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/01 13:35:30 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 14:28:21 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 12:27:12 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,9 +18,11 @@ t_page		*large_new_page(t_page *new, size_t size)
 	printf("start -> %s\n", __func__);
 	size_t	total;
 
-	total = get_size_align(size + sizeof(t_page) + sizeof(t_alloc));
+	total = get_size_align(size)
+		+ get_size_align(sizeof(t_page) + sizeof(t_alloc));
 	if (!(new = mmap(NULL, total, MMAP_ARG)))
 		return (NULL);
+	new->size = total;
 	new->type = e_large_type;
 	new->next = NULL;
 	new->alloc = (t_alloc *)new + sizeof(t_page);

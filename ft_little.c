@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 13:38:22 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 12:41:45 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 12:26:37 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,9 +16,9 @@
 t_page	*little_new_page(t_page *new, int type)
 {
 	printf("start -> %s\n", __func__);
-	//TODO: alloc nmap 
 	if (!(new = mmap(NULL, get_size_page(type), MMAP_ARG)))
 		return (NULL);
+	new->size = get_size_page(type);
 	new->type = type;
 	new->next = NULL;
 	new->alloc = (t_alloc *)new + sizeof(t_page);

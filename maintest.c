@@ -7,7 +7,7 @@ int main()
 	test = NULL;
 	for (int i = 0; i < 20; i++)
 	{
-		test = (char *)ft_malloc(sizeof(char)*100);
+		test = (char *)ft_malloc(sizeof(char)*90);
 		printf("|%p|\n", test);
 	}
 	for (int i = 0; i < 10; i++)

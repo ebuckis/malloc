@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 14:53:25 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 12:23:29 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,6 +40,7 @@ typedef struct		s_alloc
 
 typedef struct		s_page
 {
+	size_t			size;
 	int				type;
 	t_alloc			*alloc;
 	struct s_page	*next;
@@ -74,6 +75,7 @@ void				ft_free(void *ptr);
 size_t				get_size_align(size_t size);
 int					get_size_alloc(int type);
 size_t				get_size_page(int type);
+int					page_is_empty(t_page *page);
 
 void				ft_display(void);
 
