@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:37:51 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 12:23:18 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 14:38:13 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,7 @@ int		page_is_empty(t_page *page)
 	{
 		if (tmp->is_alloc)
 			return (0);
+		tmp = tmp->next;
 	}
 	return (1);
 }
@@ -38,7 +39,7 @@ size_t		get_size_align(size_t size)
 	return (ret);
 }
 
-int		get_size_alloc(int type)
+size_t		get_size_alloc(int type)
 {
 	if (type == e_small_type)
 		return (SMALL_MAX);

@@ -3,13 +3,20 @@
 int main()
 {
 	char	*test;
+	char	*truc[500];
 
 	test = NULL;
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 500; i++)
 	{
-		test = (char *)ft_malloc(sizeof(char)*90);
-		printf("|%p|\n", test);
+		truc[i] = (char *)ft_malloc(sizeof(char)*90);
 	}
+	for (int i = 0; i < 500; i++)
+	{
+		ft_free(truc[i]);
+	}
+
+
+/*
 	for (int i = 0; i < 10; i++)
 	{
 		test = (char *)ft_malloc(sizeof(char)*127);
@@ -19,16 +26,9 @@ int main()
 	{
 		test = (char *)ft_malloc(sizeof(char)*12700);
 		printf("|%p|\n", test);
-	}
+	}*/
 
 	ft_display();
-
-	if (!g_stock.large)
-		printf("large null\n");
-	if (!g_stock.small)
-		printf("small null\n");
-	if (!g_stock.tiny)
-		printf("tiny null\n");
 
 	return 0;
 }

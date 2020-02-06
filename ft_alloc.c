@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/01 10:46:30 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 13:48:54 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 15:26:17 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@ t_alloc		*alloc_init(t_alloc *new, size_t last_ad)
 {
 	new->is_alloc = 0;
 	new->next = NULL;
-	new->ptr = (void *)new + sizeof(t_alloc);
+	new->ptr = (void *)((size_t)new + sizeof(t_alloc));
 	if (last_ad < (size_t)new->ptr)
 		new->size = 0;
 	else
@@ -38,10 +38,9 @@ void	*alloc_find_place(t_page *page, size_t size)
 			last_address = (size_t)tmp->ptr + tmp->size + sizeof(t_alloc) + get_size_align(size);//maybe useless
 			if (last_address >= (size_t)page + get_size_page(page->type))
 			{
-				printf("on arrive a la fin de la page dans %s\n", __func__);
 				return (NULL);
 			}
-			tmp->next = tmp->ptr + tmp->size;
+			tmp->next = (void *)((size_t)tmp->ptr + tmp->size);
 			tmp->next = alloc_init(tmp->next, (size_t)page + get_size_page(page->type));
 		}
 		tmp = tmp->next;

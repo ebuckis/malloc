@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/20 11:42:29 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 10:14:53 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 14:58:30 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,9 +16,9 @@
 char 	*bool_print(short val)
 {
 	if (val)
-		return ("true");
+		return ("Used");
 	else
-		return ("false");
+		return ("Free");
 }
 
 void	display_list(t_page *tmp_page)
@@ -29,25 +29,21 @@ void	display_list(t_page *tmp_page)
 	t_alloc	*tmp_alloc;
 	while (tmp_page)
 	{
-		printf("__________________________\n");
-		printf("|       page n%d\n", i);
-		printf("__________________________\n");
+		printf("_____________________________________________\n");
+		printf("|	Page n%d\n", i);
+		printf("|%p - %p|\n", (void *)tmp_page, (void *)((size_t)tmp_page + tmp_page->size));
+		printf("_____________________________________________\n");
 		tmp_alloc = tmp_page->alloc;
 		while (tmp_alloc)
 		{
-			printf("+------------------------------------------------\n");
-			printf("|	Block address		: %p\n", tmp_alloc->ptr);
-			printf("|	Block size		: %d\n", tmp_alloc->size);
-			printf("|	This block is used	: %s\n", bool_print(tmp_alloc->is_alloc));
-			printf("+------------------------------------------------\n");
-
+			printf("%p - %p : %zu -> %s\n", tmp_alloc->ptr, (void *)((size_t)tmp_alloc->ptr + tmp_alloc->size), tmp_alloc->size, bool_print(tmp_alloc->is_alloc));
 			tmp_alloc = tmp_alloc->next;
 		}
+		printf("_____________________________________________\n");
 		tmp_page = tmp_page->next;
 		i++;
 	}
 }
-
 
 void	ft_display(void)
 {
@@ -60,10 +56,4 @@ void	ft_display(void)
 	printf("********************LARGE********************\n");
 	display_list(g_stock.large);
 	printf("*********************************************\n\n");
-
-
-//	tmp_page = g_stock.small;
-//	tmp_page = g_stock.large;
-
-
 }

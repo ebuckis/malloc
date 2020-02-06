@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/06 10:26:42 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 12:24:32 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 15:25:13 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ static int		free_in_alloc(void *ptr, t_page *page)
 	t_alloc	*tmp;
 
 	tmp = page->alloc;
-	while (tmp && ptr <= tmp->ptr)
+	while (tmp && ptr > (void *)tmp)
 	{
 		if (ptr == tmp->ptr)
 		{
@@ -50,14 +50,21 @@ static int		free_in_page(void *ptr, t_page *page)
 	prev = page;
 	while (tmp)
 	{
-		if (ptr >= (void *)page && ptr <= (void *)(page + get_size_page(tmp->type)))
+		if (ptr >= (void *)tmp && ptr <= (void *)((size_t)tmp + tmp->size))
 		{
 			if (free_in_alloc(ptr, tmp) && page_is_empty(tmp))
 			{
+			printf("on free la page !!!\n");
 				if (tmp == page)
+				{
 					page_first_elem(page->type, tmp->next);
-				else if (tmp != page)
+					
+				}
+				else
+				{
+
 					prev->next = tmp->next;
+				}
 				munmap(tmp, tmp->size);
 			}
 			return (1);
@@ -70,7 +77,7 @@ static int		free_in_page(void *ptr, t_page *page)
 
 void	ft_free(void *ptr)
 {
-	if (free_in_page(ptr, g_stock.small) ||
+	if (free_in_page(ptr, g_stock.tiny) ||
 		free_in_page(ptr, g_stock.small) ||
 		free_in_page(ptr, g_stock.large))
 		;
