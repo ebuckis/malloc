@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 13:38:22 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 11:59:50 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 12:47:33 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,6 @@ void	*little_alloc(t_page *page, int type, size_t size)
 	{
 		if (page->next == NULL)
 		{
-			printf("Plus de place, nouvelle page\n");
 			if (!(page->next = little_new_page(page->next, type)))
 				return (NULL);
 		}

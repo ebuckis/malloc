@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 11:22:20 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 11:53:57 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 12:47:39 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,6 @@ void			malloc_init(void)
 
 	if (!is_init)
 	{
-		printf("start -> %s\n", __func__);
 		g_stock.tiny = NULL;
 		g_stock.small = NULL;
 		g_stock.large = NULL;
