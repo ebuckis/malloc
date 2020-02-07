@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 11:56:43 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 11:58:32 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 12:31:52 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,7 @@ int				try_to_expand(t_page *page, t_alloc *alloc, size_t new_size)
 		total += tmp->size + sizeof(t_alloc);
 		tmp = tmp->next;
 	}
+	alloc->is_alloc = 1;
 	alloc->size = get_size_align(new_size);
 	alloc->next = tmp;
 	return (1);
