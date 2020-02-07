@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 14:28:06 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 14:28:07 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 15:08:48 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ static int	free_in_page(void *ptr, t_page *page)
 	return (0);
 }
 
-void		ft_free(void *ptr)
+void		free(void *ptr)
 {
 	if (ptr)
 	{
