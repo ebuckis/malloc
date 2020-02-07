@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:22:05 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 17:34:47 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,13 +72,18 @@ void				*large_alloc(t_page *page, size_t size);
 */
 void				ft_free(void *ptr);
 
-size_t				get_size_align(size_t size);
-size_t				get_size_alloc(int type);
-size_t				get_size_page(int type);
 int					page_is_empty(t_page *page);
+
+void				*realloc(void *ptr, size_t new_size);
 
 void				show_alloc_mem(void);
 
+/*
+**	Tools
+*/
+size_t				get_size_align(size_t size);
+size_t				get_size_alloc(int type);
+size_t				get_size_page(int type);
 /*
 **	Display Tools
 */

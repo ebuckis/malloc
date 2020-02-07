@@ -15,11 +15,11 @@ int main()
 		ft_free(truc[i]);
 	}
 
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 100; i++)
 	{
-		truc[i] = (char *)ft_malloc(sizeof(char)*4000);
+		truc[i] = (char *)ft_malloc(sizeof(char)*0xffffffffff);
 	}
-	for (int i = 0; i < 400; i++)
+	for (int i = 0; i < 0; i++)
 	{
 		ft_free(truc[i]);
 	}
