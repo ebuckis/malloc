@@ -6,12 +6,12 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/01 10:46:30 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 11:51:30 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 14:22:56 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_malloc.h"
+#include "malloc.h"
 
 t_alloc		*alloc_init(t_alloc *new, size_t last_ad)
 {

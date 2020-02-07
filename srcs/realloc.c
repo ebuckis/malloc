@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_realloc.c                                     .::    .:/ .      .::   */
+/*   realloc.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/07 11:56:43 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 12:31:52 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/07 14:32:08 by kcabus       #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/07 14:33:11 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_malloc.h"
+#include "malloc.h"
 
 int				try_to_expand(t_page *page, t_alloc *alloc, size_t new_size)
 {
@@ -83,7 +83,7 @@ int				find_alloc_ptr(void *ptr, t_alloc **al, t_page **page)
 	return (0);
 }
 
-void			*ft_realloc(void *ptr, size_t new_size)
+void			*realloc(void *ptr, size_t new_size)
 {
 	t_page		*page;
 	t_alloc		*alloc;
@@ -98,7 +98,7 @@ void			*ft_realloc(void *ptr, size_t new_size)
 	if (verif_type(new_size, page->type)
 		&& try_to_expand(page, alloc, new_size))
 		return (ptr);
-	new = ft_malloc(new_size);
+	new = malloc(new_size);
 	if (new == NULL)
 		return (NULL);
 	while (i < new_size && i < alloc->size)
@@ -106,6 +106,6 @@ void			*ft_realloc(void *ptr, size_t new_size)
 		((char *)new)[i] = ((char *)ptr)[i];
 		i++;
 	}
-	ft_free(ptr);
+	free(ptr);
 	return (new);
 }

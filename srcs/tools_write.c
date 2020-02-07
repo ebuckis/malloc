@@ -6,12 +6,12 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/06 17:11:22 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 11:56:35 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 14:23:27 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_malloc.h"
+#include "malloc.h"
 
 size_t		ft_strlen(char *str)
 {

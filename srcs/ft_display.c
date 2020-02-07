@@ -6,12 +6,12 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/20 11:42:29 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:21:30 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 14:22:57 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_malloc.h"
+#include "malloc.h"
 
 static void		ft_print_alloc(t_alloc *tmp)
 {

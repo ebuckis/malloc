@@ -6,12 +6,12 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:37:51 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 11:55:50 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 14:23:26 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_malloc.h"
+#include "malloc.h"
 
 int					page_is_empty(t_page *page)
 {

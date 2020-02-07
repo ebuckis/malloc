@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_malloc.c                                      .::    .:/ .      .::   */
+/*   malloc.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/31 11:22:20 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 12:47:39 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/07 14:30:39 by kcabus       #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/07 14:30:41 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_malloc.h"
+#include "malloc.h"
 
 void			*malloc_search_area(size_t size)
 {
@@ -54,7 +54,7 @@ void			malloc_init(void)
 	}
 }
 
-void			*ft_malloc(size_t size)
+void			*malloc(size_t size)
 {
 	if (size < 1
 		|| size >= 0xFFFFFFFFFFFFFFFF - (sizeof(t_page) + sizeof(t_alloc)))

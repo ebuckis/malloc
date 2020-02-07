@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re
 
-NAME =	malloc 
+NAME = libmalloc_$(HOSTTYPE).so 
 
 WFLAGS = -Wall -Wextra -Werror
 
@@ -11,30 +11,34 @@ OBJ_PATH = ./obj/
 SRC = $(addprefix $(SRC_PATH),$(N_SRCS))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 INC = -I $(INC_PATH)  
-HEADERS := $(addprefix $(INC_PATH)/, ft_malloc.h)
+HEADERS := $(addprefix $(INC_PATH)/, malloc.h)
 
 OBJ_NAME = $(N_SRCS:.c=.o)
 
 N_SRCS =	ft_alloc.c		\
 			ft_display.c	\
-			ft_free.c		\
+			free.c			\
 			ft_large.c		\
 			ft_little.c		\
-			ft_malloc.c		\
-			ft_realloc.c	\
+			malloc.c		\
+			realloc.c	\
 			maintest.c		\
 			tools_size.c	\
 			tools_write.c
 
+ifeq ($(HOSTTYPE),)
+	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+endif
+
 all : $(NAME)
 
 $(NAME):	$(OBJ)
-			@gcc $(INC) $(OBJ) -o $(NAME)
+			@gcc $(INC) $(OBJ) -shared -o $(NAME)
 			@printf "\033[34;5m Malloc OK ! \n\033[0m"
 
 $(OBJ_PATH)%.o:	$(SRC_PATH)%.c $(HEADERS)
 				@mkdir -p $(OBJ_PATH)
-				@gcc -c  $(INC) $(WFLAGS) -o $@ $<
+				@gcc -c $(INC) $(WFLAGS) -o $@ $<
 				@printf "\033[44m \033[0m"
 
 clean :

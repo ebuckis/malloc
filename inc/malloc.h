@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_malloc.h                                      .::    .:/ .      .::   */
+/*   malloc.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 13:59:12 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 14:27:37 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_MALLOC_H
-# define FT_MALLOC_H
+#ifndef MALLOC_H
+# define MALLOC_H
 
 # define TINY_MAX	128
 # define SMALL_MAX	4096
@@ -57,7 +57,7 @@ t_stock				g_stock;
 /*
 ** Malloc
 */
-void				*ft_malloc(size_t size);
+void				*malloc(size_t size);
 t_page				*little_new_page(t_page *new, int type);
 void				*little_alloc(t_page *page, int type, size_t size);
 t_alloc				*alloc_init(t_alloc *new, size_t last_ad);
@@ -68,11 +68,11 @@ void				*large_alloc(t_page *page, size_t size);
 /*
 **	Free
 */
-void				ft_free(void *ptr);
+void				free(void *ptr);
 
 int					page_is_empty(t_page *page);
 
-void				*ft_realloc(void *ptr, size_t new_size);
+void				*realloc(void *ptr, size_t new_size);
 
 void				show_alloc_mem(void);
 

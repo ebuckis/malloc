@@ -1,4 +1,4 @@
-#include "ft_malloc.h"
+#include "malloc.h"
 
 int main()
 {
@@ -8,20 +8,20 @@ int main()
 	int j;
 
 	for (j = 0; j < 50; j++)
-		truc[j] = ft_malloc(j);
+		truc[j] = malloc(j);
 
 	for (j = 50; j < 100; j++)
-		truc[j + 50] = ft_malloc(j + 128);
+		truc[j + 50] = malloc(j + 128);
 
 	for (j = 100; j < 150; j++)
-		truc[j + 100] = ft_malloc(j + 5000);
+		truc[j + 100] = malloc(j + 5000);
 
-	test = ft_malloc(i);
+	test = malloc(i);
 	while (1)
 	{
 		printf(" i --->%zu\n", i);
 		printf("ptr--->%p\n", test);
-		test = ft_realloc(test, i);
+		test = realloc(test, i);
 		i *= 2;
 		if (i > 268435456)
 			break ;
