@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/06 17:11:22 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:12:47 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:56:35 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,15 +23,16 @@ size_t		ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_putstr(char *str)
+void		ft_putstr(char *str)
 {
 	write(0, str, ft_strlen(str));
 }
 
-void	ft_putnb(size_t n)
+void		ft_putnb(size_t n)
 {
-	char c = 0;
+	char	c;
 
+	c = 0;
 	if (n > 9)
 	{
 		ft_putnb(n / 10);
@@ -44,9 +45,10 @@ void	ft_putnb(size_t n)
 	}
 }
 
-char	ft_puthexa(size_t n)
+void		ft_puthexa(size_t n)
 {
-	char c = 0;
+	char c;
+
 	if (n < 10)
 		c = '0' + n;
 	else
@@ -54,7 +56,7 @@ char	ft_puthexa(size_t n)
 	write(0, &c, 1);
 }
 
-void	ft_putaddress(size_t add)
+void		ft_putaddress(size_t add)
 {
 	int		i;
 	int		j;

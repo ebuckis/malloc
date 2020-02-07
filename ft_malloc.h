@@ -6,22 +6,20 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:34:47 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 12:05:11 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef	MALLOC_H
-# define MALLOC_H
+#ifndef FT_MALLOC_H
+# define FT_MALLOC_H
 
+# define TINY_MAX	128
+# define SMALL_MAX	4096
 # include <string.h>
 # include <stdio.h>
 # include <sys/mman.h>
 # include <unistd.h>
-
-# define TINY_MAX	128
-# define SMALL_MAX	4096
-# define MMAP_ARG	PROT_READ | PROT_WRITE,	MAP_PRIVATE | MAP_ANONYMOUS, -1, 0
 
 typedef	enum		e_malloc_type
 {
@@ -74,7 +72,7 @@ void				ft_free(void *ptr);
 
 int					page_is_empty(t_page *page);
 
-void				*realloc(void *ptr, size_t new_size);
+void				*ft_realloc(void *ptr, size_t new_size);
 
 void				show_alloc_mem(void);
 
@@ -88,7 +86,7 @@ size_t				get_size_page(int type);
 **	Display Tools
 */
 void				ft_putaddress(size_t add);
-char				ft_puthexa(size_t n);
+void				ft_puthexa(size_t n);
 void				ft_putnb(size_t n);
 void				ft_putstr(char *str);
 size_t				ft_strlen(char *str);

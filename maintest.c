@@ -4,31 +4,29 @@ int main()
 {
 	char	*test;
 	char	*truc[500];
-	size_t i = 2;
+	size_t i = 1;
+	int j;
 
+	for (j = 0; j < 50; j++)
+		truc[j] = ft_malloc(j);
+
+	for (j = 50; j < 100; j++)
+		truc[j + 50] = ft_malloc(j + 128);
+
+	for (j = 100; j < 150; j++)
+		truc[j + 100] = ft_malloc(j + 5000);
+
+	test = ft_malloc(i);
 	while (1)
 	{
-		test = ft_malloc(i);
-		printf("--->%zu\n", i);
-		printf("--->%p\n", test);
-		ft_free(test);
-		i += 2;
-		if (i == 0)
-			return 1;
+		printf(" i --->%zu\n", i);
+		printf("ptr--->%p\n", test);
+		test = ft_realloc(test, i);
+		i *= 2;
+		if (i > 268435456)
+			break ;
 	}
 	
-/*
-	for (int i = 0; i < 10; i++)
-	{
-		test = (char *)ft_malloc(sizeof(char)*127);
-		printf("|%p|\n", test);
-	}
-	for (int i = 0; i < 10; i++)
-	{
-		test = (char *)ft_malloc(sizeof(char)*12700);
-		printf("|%p|\n", test);
-	}*/
-
 	show_alloc_mem();
 
 	return 0;

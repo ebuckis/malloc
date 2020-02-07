@@ -6,14 +6,14 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/06 10:26:42 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 15:25:13 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:52:56 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-void	page_first_elem(int type, t_page *next)
+void		page_first_elem(int type, t_page *next)
 {
 	if (type == e_tiny_type)
 		g_stock.tiny = next;
@@ -23,10 +23,9 @@ void	page_first_elem(int type, t_page *next)
 		g_stock.large = next;
 }
 
-
-static int		free_in_alloc(void *ptr, t_page *page)
+static int	free_in_alloc(void *ptr, t_page *page)
 {
-	t_alloc	*tmp;
+	t_alloc		*tmp;
 
 	tmp = page->alloc;
 	while (tmp && ptr > (void *)tmp)
@@ -41,7 +40,7 @@ static int		free_in_alloc(void *ptr, t_page *page)
 	return (1);
 }
 
-static int		free_in_page(void *ptr, t_page *page)
+static int	free_in_page(void *ptr, t_page *page)
 {
 	t_page	*tmp;
 	t_page	*prev;
@@ -55,13 +54,9 @@ static int		free_in_page(void *ptr, t_page *page)
 			if (free_in_alloc(ptr, tmp) && page_is_empty(tmp))
 			{
 				if (tmp == page)
-				{
 					page_first_elem(page->type, tmp->next);
-				}
 				else
-				{
 					prev->next = tmp->next;
-				}
 				munmap(tmp, tmp->size);
 			}
 			return (1);
@@ -72,7 +67,7 @@ static int		free_in_page(void *ptr, t_page *page)
 	return (0);
 }
 
-void	ft_free(void *ptr)
+void		ft_free(void *ptr)
 {
 	if (ptr)
 	{

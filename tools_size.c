@@ -6,17 +6,16 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:37:51 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 14:38:13 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:55:50 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-
-int		page_is_empty(t_page *page)
+int					page_is_empty(t_page *page)
 {
-	t_alloc	*tmp;
+	t_alloc			*tmp;
 
 	tmp = page->alloc;
 	while (tmp)
@@ -28,9 +27,9 @@ int		page_is_empty(t_page *page)
 	return (1);
 }
 
-size_t		get_size_align(size_t size)
+size_t				get_size_align(size_t size)
 {
-	size_t	ret;
+	size_t			ret;
 
 	ret = size % 16;
 	if (ret == 0)
@@ -39,7 +38,7 @@ size_t		get_size_align(size_t size)
 	return (ret);
 }
 
-size_t		get_size_alloc(int type)
+size_t				get_size_alloc(int type)
 {
 	if (type == e_small_type)
 		return (SMALL_MAX);
@@ -48,7 +47,7 @@ size_t		get_size_alloc(int type)
 	return (0);
 }
 
-size_t		get_size_page(int type)
+size_t				get_size_page(int type)
 {
 	static size_t	small_size = 0;
 	static size_t	tiny_size = 0;
@@ -57,7 +56,8 @@ size_t		get_size_page(int type)
 	{
 		if (small_size == 0)
 		{
-			small_size = (sizeof(t_page) + (100 * (sizeof(t_alloc) + SMALL_MAX)));
+			small_size = (sizeof(t_page)
+				+ (100 * (sizeof(t_alloc) + SMALL_MAX)));
 			small_size = ((small_size / getpagesize()) + 1) * getpagesize();
 		}
 		return (small_size);

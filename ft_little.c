@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 13:38:22 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 14:46:05 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:59:50 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,8 @@
 
 t_page	*little_new_page(t_page *new, int type)
 {
-	if (!(new = mmap(NULL, get_size_page(type), MMAP_ARG)))
+	if (!(new = mmap(NULL, get_size_page(type),
+		PROT_READ | PROT_WRITE,	MAP_PRIVATE | MAP_ANONYMOUS, -1, 0)))
 		return (NULL);
 	new->size = get_size_page(type);
 	new->type = type;

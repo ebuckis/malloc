@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 11:22:20 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 14:26:13 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:53:57 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,17 +17,15 @@ void			*malloc_search_area(size_t size)
 {
 	void		*ptr;
 
-	if (size + sizeof(t_page) <= TINY_MAX)
+	if (get_size_align(size) + sizeof(t_page) <= TINY_MAX)
 	{
-		printf("Tiny\n");
 		if (!g_stock.tiny)
 			if (!(g_stock.tiny = little_new_page(g_stock.tiny, e_tiny_type)))
 				return (NULL);
 		ptr = little_alloc(g_stock.tiny, e_tiny_type, size);
 	}
-	else if (size + sizeof(t_page) <= SMALL_MAX)
+	else if (get_size_align(size) + sizeof(t_page) <= SMALL_MAX)
 	{
-		printf("small\n");
 		if (!g_stock.small)
 			if (!(g_stock.small = little_new_page(g_stock.small, e_small_type)))
 				return (NULL);
@@ -35,7 +33,6 @@ void			*malloc_search_area(size_t size)
 	}
 	else
 	{
-		printf("large\n");
 		if (!g_stock.large)
 			if (!(g_stock.large = large_new_page(g_stock.large, size)))
 				return (NULL);
@@ -57,7 +54,6 @@ void			malloc_init(void)
 		is_init = 1;
 	}
 }
-
 
 void			*ft_malloc(size_t size)
 {

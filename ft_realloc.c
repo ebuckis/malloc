@@ -1,31 +1,59 @@
-
-
-
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_realloc.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2020/02/07 11:56:43 by kcabus       #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/07 11:58:32 by kcabus      ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-int	try_to_expand(t_alloc *alloc, size_t last_size, size_t new_size, size_t )
+int				try_to_expand(t_page *page, t_alloc *alloc, size_t new_size)
 {
-//next null -> verif page size
-//next pas null -> on additionne les tailles des alloc libres
+	size_t		last_size;
+	size_t		total;
+	t_alloc		*tmp;
 
+	last_size = alloc->size;
+	total = last_size;
+	if (get_size_align(new_size) <= last_size)
+		return (1);
+	if ((size_t)alloc->ptr
+		+ get_size_align(new_size) > (size_t)page + page->size)
+		return (0);
+	alloc->is_alloc = 0;
+	tmp = alloc;
+	while (tmp && total < get_size_align(new_size))
+	{
+		if (tmp->is_alloc)
+			return (0);
+		total += tmp->size + sizeof(t_alloc);
+		tmp = tmp->next;
+	}
+	alloc->size = get_size_align(new_size);
+	alloc->next = tmp;
+	return (1);
 }
 
-static int	verif_type(size_t size, int type)
+static int		verif_type(size_t size, int type)
 {
-	int		new_type;
+	int			new_type;
 
-	if (size + sizeof(t_page) <= TINY_MAX)
+	if (get_size_align(size) + sizeof(t_page) <= TINY_MAX)
 		new_type = e_tiny_type;
-	else if (size + sizeof(t_page) <= SMALL_MAX)
+	else if (get_size_align(size) + sizeof(t_page) <= SMALL_MAX)
 		new_type = e_small_type;
 	else
 		new_type = e_large_type;
-
 	return (new_type == type);
 }
 
-static int	find_ptr(void *ptr, t_alloc **al, int *type, t_page *tmp)
+static t_page	*find_ptr(void *ptr, t_alloc **al, t_page *tmp)
 {
 	while (tmp)
 	{
@@ -35,45 +63,48 @@ static int	find_ptr(void *ptr, t_alloc **al, int *type, t_page *tmp)
 			while (*al)
 			{
 				if ((*al)->ptr == ptr)
-				{
-					type = tmp->type;
-					return (1);
-				}
+					return (tmp);
 				*al = (*al)->next;
 			}
-			return (0);
+			return (NULL);
 		}
 		tmp = tmp->next;
 	}
-	return (0);
+	return (NULL);
 }
 
-int			find_alloc_ptr(void *ptr, t_alloc **al, int *type)
+int				find_alloc_ptr(void *ptr, t_alloc **al, t_page **page)
 {
-	if (find_ptr(ptr, al, type, g_stock.tiny)
-		|| find_ptr(ptr, al, type, g_stock.small)
-		|| find_ptr(ptr, al, type, g_stock.large))
+	if ((*page = find_ptr(ptr, al, g_stock.tiny))
+		|| (*page = find_ptr(ptr, al, g_stock.small))
+		|| (*page = find_ptr(ptr, al, g_stock.large)))
 		return (1);
 	return (0);
 }
 
-
-void		*ft_realloc(void *ptr, size_t new_size)
+void			*ft_realloc(void *ptr, size_t new_size)
 {
-	t_alloc	*alloc;
-	int		type;
-//verif sur new_size ?
+	t_page		*page;
+	t_alloc		*alloc;
+	void		*new;
+	size_t		i;
+
+	i = 0;
 	if (new_size < 1
-		|| new_size >= 0xFFFFFFFFFFFFFFFF - (sizeof(t_page) + sizeof(t_alloc)))
+		|| new_size >= 0xFFFFFFFFFFFFFFFF - (sizeof(t_page) + sizeof(t_alloc))
+		|| !find_alloc_ptr(ptr, &alloc, &page))
 		return (NULL);
-	if (!find_alloc_ptr(ptr, &alloc, &type))
+	if (verif_type(new_size, page->type)
+		&& try_to_expand(page, alloc, new_size))
+		return (ptr);
+	new = ft_malloc(new_size);
+	if (new == NULL)
 		return (NULL);
-	//besoin de page pour connaitre la limite de taille
-	if (verif_type(new_size, type))
+	while (i < new_size && i < alloc->size)
 	{
-		if (try_to_expand(alloc, alloc->size, new_size))
-			return (ptr);
+		((char *)new)[i] = ((char *)ptr)[i];
+		i++;
 	}
 	ft_free(ptr);
-	return (ft_malloc(new_size));
+	return (new);
 }
