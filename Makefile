@@ -33,6 +33,7 @@ all : $(NAME)
 
 $(NAME):	$(OBJ)
 			@gcc $(INC) $(OBJ) -shared -o $(NAME)
+			@ln -s $(NAME) libft_malloc.so 2> /dev/null || true
 			@printf "\033[34;5m Malloc OK ! \n\033[0m"
 
 $(OBJ_PATH)%.o:	$(SRC_PATH)%.c $(HEADERS)
