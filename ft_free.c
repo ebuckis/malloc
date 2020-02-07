@@ -54,15 +54,12 @@ static int		free_in_page(void *ptr, t_page *page)
 		{
 			if (free_in_alloc(ptr, tmp) && page_is_empty(tmp))
 			{
-			printf("on free la page !!!\n");
 				if (tmp == page)
 				{
 					page_first_elem(page->type, tmp->next);
-					
 				}
 				else
 				{
-
 					prev->next = tmp->next;
 				}
 				munmap(tmp, tmp->size);
