@@ -12,7 +12,7 @@ int main()
 		printf("--->%zu\n", i);
 		printf("--->%p\n", test);
 		ft_free(test);
-		i *= 2;
+		i += 2;
 		if (i == 0)
 			return 1;
 	}
