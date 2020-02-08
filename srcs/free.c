@@ -74,6 +74,6 @@ void		free(void *ptr)
 		if (free_in_page(ptr, g_stock.tiny) ||
 			free_in_page(ptr, g_stock.small) ||
 			free_in_page(ptr, g_stock.large))
-			;
+			 return ;
 	}
 }
