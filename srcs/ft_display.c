@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/20 11:42:29 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 14:22:57 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 15:04:46 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,9 +41,11 @@ static size_t	show_page_alloc(char *title, t_page *page)
 		tmp_alloc = tmp->alloc;
 		while (tmp_alloc)
 		{
-			ft_print_alloc(tmp_alloc);
 			if (tmp_alloc->is_alloc)
+			{
 				size += tmp_alloc->size;
+				ft_print_alloc(tmp_alloc);
+			}
 			tmp_alloc = tmp_alloc->next;
 		}
 		tmp = tmp->next;

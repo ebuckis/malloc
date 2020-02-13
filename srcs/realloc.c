@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 14:32:08 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/13 10:47:26 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 15:04:02 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,14 +20,14 @@ int				try_to_expand(t_page *page, t_alloc *alloc, size_t new_size)
 	t_alloc		*tmp;
 
 	last_size = alloc->size;
-	total = last_size;
-	if (get_size_align(new_size) <= last_size)
+	if (get_size_align(new_size) == last_size)//error ?
 		return (1);
 	if ((size_t)alloc->ptr
 		+ get_size_align(new_size) > (size_t)page + page->size)
 		return (0);
 	alloc->is_alloc = 0;
-	tmp = alloc;
+	tmp = alloc->next;
+	total = last_size;
 	while (tmp && total < get_size_align(new_size))
 	{
 		if (tmp->is_alloc)
@@ -101,9 +101,7 @@ void			*realloc(void *ptr, size_t new_size)
 		&& try_to_expand(page, alloc, new_size))
 		return (ptr);
 	new = malloc(new_size);
-	if (new == NULL)
-		return (NULL);
-	while (i < new_size && i < alloc->size)
+	while (new && i < new_size && i < alloc->size)
 	{
 		((char *)new)[i] = ((char *)ptr)[i];
 		i++;
