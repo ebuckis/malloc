@@ -21,6 +21,7 @@ N_SRCS =	ft_alloc.c		\
 			ft_large.c		\
 			ft_little.c		\
 			malloc.c		\
+			calloc.c		\
 			realloc.c		\
 			tools_size.c	\
 			tools_write.c
