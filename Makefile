@@ -46,5 +46,6 @@ clean :
 
 fclean : 	clean
 			@rm -rf $(NAME)
+			@rm -rf libft_malloc.so
 
 re : fclean clean all

@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 14:43:09 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 10:13:22 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #ifndef MALLOC_H
 # define MALLOC_H
 
-# define TINY_MAX	128
+# define TINY_MAX	64
 # define SMALL_MAX	4096
 # include <string.h>
 # include <stdio.h>

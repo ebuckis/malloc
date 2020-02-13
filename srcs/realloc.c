@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 14:32:08 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 14:33:11 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 10:47:26 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,6 +91,8 @@ void			*realloc(void *ptr, size_t new_size)
 	size_t		i;
 
 	i = 0;
+	if (ptr == NULL)
+		return (malloc(new_size));
 	if (new_size < 1
 		|| new_size >= 0xFFFFFFFFFFFFFFFF - (sizeof(t_page) + sizeof(t_alloc))
 		|| !find_alloc_ptr(ptr, &alloc, &page))
