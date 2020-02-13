@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/08 13:35:53 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/13 11:46:40 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 15:10:57 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,7 +74,7 @@ int					page_is_empty(t_page *page);
 
 void				*realloc(void *ptr, size_t new_size);
 
-void 				*calloc(size_t number, size_t size);
+void				*calloc(size_t number, size_t size);
 
 void				show_alloc_mem(void);
 

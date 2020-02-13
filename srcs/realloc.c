@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 14:32:08 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/13 15:04:02 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 15:10:30 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ int				try_to_expand(t_page *page, t_alloc *alloc, size_t new_size)
 	t_alloc		*tmp;
 
 	last_size = alloc->size;
-	if (get_size_align(new_size) == last_size)//error ?
+	if (get_size_align(new_size) == last_size)
 		return (1);
 	if ((size_t)alloc->ptr
 		+ get_size_align(new_size) > (size_t)page + page->size)
