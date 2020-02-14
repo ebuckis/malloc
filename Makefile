@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re
 
-NAME = libmalloc_$(HOSTTYPE).so 
+NAME = libft_malloc_$(HOSTTYPE).so 
 
 WFLAGS = -Wall -Wextra -Werror
 

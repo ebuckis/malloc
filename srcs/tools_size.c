@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/31 10:37:51 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/13 15:05:05 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 15:18:08 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,19 @@ size_t				get_size_align(size_t size)
 	if (ret == 0)
 		return (size);
 	ret = 16 * ((size / 16) + 1);
+	return (ret);
+}
+
+size_t				get_round_pagesize(size_t size)
+{
+	size_t			ret;
+	size_t			p_size;
+
+	p_size = getpagesize();
+	ret = size % p_size;
+	if (ret == 0)
+		return (size);
+	ret = p_size * ((size / p_size) + 1);
 	return (ret);
 }
 

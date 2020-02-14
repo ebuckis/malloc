@@ -6,7 +6,7 @@
 /*   By: kcabus <kcabus@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/01 13:35:30 by kcabus       #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 14:29:48 by kcabus      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 15:18:16 by kcabus      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,8 +17,8 @@ t_page		*large_new_page(t_page *new, size_t size)
 {
 	size_t	total;
 
-	total = get_size_align(size)
-		+ sizeof(t_page) + sizeof(t_alloc);
+	total = get_round_pagesize(get_size_align(size)
+		+ sizeof(t_page) + sizeof(t_alloc));
 	new = mmap(NULL, total, PROT_READ | PROT_WRITE,
 		MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	if (!new || (size_t)new == 0xFFFFFFFFFFFFFFFF)
